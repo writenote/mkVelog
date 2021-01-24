@@ -1,10 +1,19 @@
 import React from 'react';
+import { Main, Write } from './pages';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
-    <div>
-      Edit <code>src/App.js</code> and save to reload.
-    </div>
+    <>
+      <BrowserRouter>
+        <Route exact path='/' component={Main} />
+
+        <Switch>
+          <Route exact path='/write' component={Write} />
+        </Switch>
+
+      </BrowserRouter>
+    </>
   );
 }
 

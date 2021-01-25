@@ -7,4 +7,4 @@ function Search() {
   return <Container></Container>;
 }
 
-export default Search
+export default Search;

@@ -13,7 +13,6 @@ function App() {
           <Route exact path='/search' component={Search} />
           <Route exact path='/write' component={Write} />
         </Switch>
-
       </BrowserRouter>
     </>
   );

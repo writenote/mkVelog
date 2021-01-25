@@ -7,4 +7,4 @@ function Write() {
   return <Container></Container>;
 }
 
-export default Write
+export default Write;

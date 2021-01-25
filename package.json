@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/helper-builder-react-jsx": "^7.10.4",
+    "@babel/helper-builder-react-jsx-experimental": "^7.12.11",
     "@emotion/react": "^11.1.4",
     "@emotion/styled": "^11.0.0",
     "@testing-library/jest-dom": "^5.11.4",
@@ -13,6 +15,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "recoil": "^0.1.2",
+    "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4",
     "yarn": "^1.22.10"
   },

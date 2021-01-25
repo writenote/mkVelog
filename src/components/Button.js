@@ -8,9 +8,9 @@ const StyledButton = styled.button`
   font-size: 1em;
   font-weight: bold;
 
-  height: 2.3em;
+  height: 2em;
 
-  border: 0.2em solid #2e2e2e;
+  border: 0.15em solid #2e2e2e;
   color: black;
 
   border-radius: 1.1em;

@@ -11,13 +11,16 @@ const Container = styled.div`
   left: 0;
   display: flex;
   width: 100vw;
-  height: 60px;
+  height: 100px;
   background-color: #fff;
   z-index: 999999;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 4em;
   position: relative;
   border-bottom: 1px solid #eee;
+
+  margin-left: auto;
+  margin-right: auto;
 }
 `;
 
@@ -27,7 +30,7 @@ function Header() {
   return (
     <Container>
       <img
-        style={{ height: '35px', cursor: 'pointer' }}
+        style={{ height: '1.6em', cursor: 'pointer' }}
         src={logo}
         onClick={() => {
           history.push('/');

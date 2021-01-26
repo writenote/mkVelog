@@ -21,6 +21,7 @@
   font-size: 1.5rem;
   color: rgb(134, 142, 150);
   margin-bottom: 2.25rem;
+  cursor: pointer;
 }
 
 .popup .contents {

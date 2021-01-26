@@ -14,7 +14,6 @@ function Signin() {
         <div className='exit'>
           <img
             src={clear}
-            cursor='pointer'
             className='clear'
             alt='clear'
             onClick={() => {

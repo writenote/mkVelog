@@ -4,8 +4,8 @@ import styled from '@emotion/styled';
 
 const Container = styled.div``;
 
-function main() {
+function Main() {
   return <Container></Container>;
 }
 
-export default main;
+export default Main;

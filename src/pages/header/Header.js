@@ -6,14 +6,10 @@ import { AuthButton } from '../../components';
 import { logo, search } from '../../assets';
 
 const Container = styled.div`
-  position: fixed;
   top: 0;
   left: 0;
   display: flex;
-  width: 100vw;
   height: 100px;
-  background-color: #fff;
-  z-index: 999999;
   align-items: center;
   padding: 0 4em;
   position: relative;
@@ -41,7 +37,9 @@ function Header() {
         <Link to='/Search'>
           <img src={search} className='search' alt='search' />
         </Link>
-        <AuthButton>로그인</AuthButton>
+        <Link to='/signin'>
+          <AuthButton>로그인</AuthButton>
+        </Link>
       </div>
     </Container>
   );

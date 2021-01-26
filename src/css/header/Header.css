@@ -1,8 +1,7 @@
 .nav {
   display: flex;
   -webkit-box-align: center;
-  position: absolute;
-  right: 15em;
+  margin-left: auto;
 }
 
 .search {

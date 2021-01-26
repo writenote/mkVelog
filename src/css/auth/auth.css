@@ -1,0 +1,40 @@
+.popup {
+  position: absolute;
+  top: 20%;
+  left: 32%;
+  margin: auto;
+  width: 606px;
+  height: 480px;
+  box-shadow: rgb(0 0 0 / 9%) 0px 2px 12px 0px;
+  display: flex;
+  flex: 1 1 0%;
+  background: white;
+  padding: 1.5rem;
+  flex-direction: column;
+  z-index: 1;
+}
+
+.popup .exit {
+  display: flex;
+  -webkit-box-pack: end;
+  justify-content: flex-end;
+  font-size: 1.5rem;
+  color: rgb(134, 142, 150);
+  margin-bottom: 2.25rem;
+}
+
+.popup .contents {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  line-height: 1.5;
+}
+
+.link {
+  text-decoration: none;
+  display: inline-block;
+  font-weight: bold;
+  color: rgb(105, 14, 14);
+  cursor: pointer;
+}

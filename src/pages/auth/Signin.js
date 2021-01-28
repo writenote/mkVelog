@@ -13,7 +13,8 @@ function Signin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [newAccount, setNewAccount] = useState(true);
+
+  const [user, setUser] = useState('');
 
   const onChange = (event) => {
     const {
@@ -30,17 +31,24 @@ function Signin() {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      //let data;
-      if (newAccount) {
-        // create account
-        await authService.createUserWithEmailAndPassword(email, password);
-      } else {
-        // log in
-        await authService.signInWithEmailAndPassword(email, password);
-      }
+      await authService.signInWithEmailAndPassword(email, password);
+      return history.push('/');
     } catch (error) {
       setError(error.message);
     }
+  };
+
+  const signState = () => {
+    let user_state = localStorage.getItem('auth');
+    if (!user_state) return;
+    setUser(JSON.parse(user_state));
+    return true;
+  };
+
+  const signOut = () => {
+    localStorage.removeItem('auth');
+    setUser(null);
+    window.location.href = '/';
   };
 
   return (

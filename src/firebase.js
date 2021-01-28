@@ -12,6 +12,9 @@ const firebaseConfig = {
 // firebaseConfig 정보로 firebase 시작
 firebase.initializeApp(firebaseConfig);
 
-const firestore = firebase.firestore();
+const firebaseInstance = firebase;
+const authService = firebase.auth(); // 로그인 모듈
+const dbService = firebase.firestore(); // 데이터베이스
+const storageService = firebase.storage(); // 이미지 저장 스토리지
 
-export { firestore };
+export { firebaseInstance, authService, dbService, storageService };

@@ -3,78 +3,45 @@ import styled from '@emotion/styled';
 import '../../css/auth/auth.css';
 import { clear } from '../../assets';
 import { useHistory, Link } from 'react-router-dom';
-import { firestore } from '../../firebase';
-import firebase from 'firebase/app';
-import 'firebase/auth';
+import { authService } from '../../firebase';
 
 const Container = styled.div``;
 
 function Signin() {
   const history = useHistory();
 
-  const [eamil, setEamil] = useState('');
-  const handleClick = () => {};
-  const handleChange = (e) => {
-    setEamil(e.target.value);
-  };
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [newAccount, setNewAccount] = useState(true);
 
-  const actionCodeSettings = {
-    url: 'velogtest.firebaseapp.com',
-    handleCodeInApp: true,
-    iOS: {
-      bundleId: 'com.example.ios',
-    },
-    android: {
-      packageName: 'com.example.android',
-      installApp: true,
-      minimumVersion: '12',
-    },
-    dynamicLinkDomain: 'example.page.link',
-  };
+  const onChange = (event) => {
+    const {
+      target: { name, value },
+    } = event;
 
-  function emailLinkSend(email, { actionCodeSettings }) {
-    firebase
-      .auth()
-      .sendSignInLinkToEmail(email, actionCodeSettings)
-      .then(() => {
-        window.localStorage.setItem('emailForSignIn', email);
-        console.log('test____ss');
-      })
-      .catch((error) => {
-        console.log(error.code);
-      });
-  }
-
-  function emailLinkComplete() {
-    if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
-      let email = window.localStorage.getItem('emailForSignIn');
-      if (!email) {
-        email = window.prompt('Please provide your email for confirmation');
-      }
-      firebase
-        .auth()
-        .signInWithEmailLink(email, window.location.href)
-        .then((result) => {
-          // Clear email from storage.
-          window.localStorage.removeItem('emailForSignIn');
-        })
-        .catch((error) => {
-          console.log(error.code);
-        });
+    if (name === 'email') {
+      setEmail(value);
+    } else if (name === 'password') {
+      setPassword(value);
     }
-  }
+  };
 
-  function signOut() {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        // Sign-out successful.
-      })
-      .catch((error) => {
-        // An error happened.
-      });
-  }
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      //let data;
+      if (newAccount) {
+        // create account
+        await authService.createUserWithEmailAndPassword(email, password);
+      } else {
+        // log in
+        await authService.signInWithEmailAndPassword(email, password);
+      }
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   return (
     <Container>
@@ -92,10 +59,26 @@ function Signin() {
         <div className='contents'>
           <h2>로그인</h2>
           <h4>이메일로 로그인</h4>
-          <form>
-            <input value={eamil} onChange={handleChange} placeholder='이메일을 입력하세요.' />
-            <button onClick={handleClick}>로그인</button>
+          <form onSubmit={onSubmit}>
+            <input
+              name='email'
+              type='email'
+              value={email}
+              onChange={onChange}
+              required
+              placeholder='이메일을 입력하세요.'
+            />
+            <input
+              name='password'
+              type='password'
+              value={password}
+              onChange={onChange}
+              required
+              placeholder='비밀번호를 입력하세요.'
+            />
+            <button>로그인</button>
           </form>
+          <span>에러:: {error}</span>
         </div>
         <div>
           <p>소셜 계정으로 로그인</p>

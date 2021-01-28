@@ -28,7 +28,7 @@ function Header() {
 
   useEffect(() => {
     signState();
-  });
+  }, [user]);
 
   return (
     <Container>
@@ -44,7 +44,7 @@ function Header() {
         <Link to='/Search'>
           <img src={search} className='search' alt='search' />
         </Link>
-        {user === true ? <LoggedHeader signOut={signOut} /> : <UnLoggedHeader />}
+        {user === false ? <LoggedHeader signOut={signOut} /> : <UnLoggedHeader />}
       </div>
     </Container>
   );

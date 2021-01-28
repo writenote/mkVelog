@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import '../../css/auth/auth.css';
 import { clear } from '../../assets';
 import { useHistory, Link } from 'react-router-dom';
-import { authService } from '../../firebase';
+import { Auth } from '../../stores/Auth';
 
 const Container = styled.div``;
 
@@ -12,43 +12,12 @@ function Signin() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
 
-  const [user, setUser] = useState('');
+  const { error, onSignin } = Auth();
 
-  const onChange = (event) => {
-    const {
-      target: { name, value },
-    } = event;
-
-    if (name === 'email') {
-      setEmail(value);
-    } else if (name === 'password') {
-      setPassword(value);
-    }
-  };
-
-  const onSubmit = async (event) => {
+  const signin = async (event) => {
     event.preventDefault();
-    try {
-      await authService.signInWithEmailAndPassword(email, password);
-      return history.push('/');
-    } catch (error) {
-      setError(error.message);
-    }
-  };
-
-  const signState = () => {
-    let user_state = localStorage.getItem('auth');
-    if (!user_state) return;
-    setUser(JSON.parse(user_state));
-    return true;
-  };
-
-  const signOut = () => {
-    localStorage.removeItem('auth');
-    setUser(null);
-    window.location.href = '/';
+    onSignin(email, password);
   };
 
   return (
@@ -67,12 +36,12 @@ function Signin() {
         <div className='contents'>
           <h2>로그인</h2>
           <h4>이메일로 로그인</h4>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={signin}>
             <input
               name='email'
               type='email'
               value={email}
-              onChange={onChange}
+              onChange={({ target: { value } }) => setEmail(value)}
               required
               placeholder='이메일을 입력하세요.'
             />
@@ -80,7 +49,7 @@ function Signin() {
               name='password'
               type='password'
               value={password}
-              onChange={onChange}
+              onChange={({ target: { value } }) => setPassword(value)}
               required
               placeholder='비밀번호를 입력하세요.'
             />
